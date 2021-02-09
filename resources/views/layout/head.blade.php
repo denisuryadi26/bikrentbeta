@@ -14,3 +14,5 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 <link rel="icon" href="{{asset('assets/dist/img/favicons.ico') }}" type="image/x-icon"/>
+
+<link rel="stylesheet" href="{{asset('assets/lightbox2/dist/css/lightbox.min.css') }}">

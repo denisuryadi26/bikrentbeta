@@ -59,7 +59,8 @@
                                                 <td>{{ $product->title }}</td>
                                                 <td>Rp. {{ number_format($product->price,0,',','.') }}</td>
                                                 <td class="text-center">
-                                                    <img src="{{ Storage::url('public/product/').$product->image }}" class="rounded" style="width: 150px">
+                                                    <!-- <img src="{{ Storage::url('public/product/').$product->image }}" data-lightbox="image-1" class="rounded" style="width: 150px"> -->
+                                                    <a class="zoomimage" href="{{ Storage::url('public/product/').$product->image }}" data-lightbox="example-1" data-title="{{ $product->title }}"><img  class="rounded" style="width: 150px" src="{{ Storage::url('public/product/').$product->image }}" alt="image-1" /></a>
                                                 </td>
                                                 <td>{!! $product->content !!}</td>
                                                 <td class="text-center">
@@ -124,6 +125,6 @@
             
         @endif
     </script>
-
+    <script src="{{asset('assets/lightbox2/dist/js/lightbox-plus-jquery.min.js')}}"></script>
 </body>
 </html>
