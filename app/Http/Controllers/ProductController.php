@@ -47,12 +47,12 @@ class ProductController extends Controller
 
         //upload image
         $image = $request->file('image');
-        $image->storeAs('public/product', $image->hashName());
+        $image->storeAs('public/product', $image->getClientOriginalName());
 
         $product = product::create([
             'title'     => $request->title,
             'price'     => preg_replace('([^0-9])', '', $request->price),
-            'image'     => $image->hashName(),
+            'image'     => $image->getClientOriginalName(),
             'content'   => $request->content
         ]);
 
@@ -109,10 +109,10 @@ class ProductController extends Controller
 
             //upload new image
             $image = $request->file('image');
-            $image->storeAs('public/product', $image->hashName());
+            $image->storeAs('public/product', $image->getClientOriginalName());
 
             $product->update([
-                'image'     => $image->hashName(),
+                'image'     => $image->getClientOriginalName(),
                 'title'     => $request->title,
                 'price'     => preg_replace('([^0-9])', '', $request->price),
                 'content'   => $request->content
