@@ -11,6 +11,8 @@ class MultipleProductModel extends Model
     *
     * @var array
     */
+    protected $table = 'multipleproduct';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'image', 'title', 'content','price'
     ];
