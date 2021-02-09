@@ -93,7 +93,7 @@
                                             <div class="col-sm-4">
                                                 <!-- <input type="file" class="form-control @error('image') is-invalid @enderror" name="image"> -->
                                                 <div class="input-group control-group increment" >
-                                                <input type="file" name="image[]" class="form-control">
+                                                <input type="file" name="image[]" class="form-control @error('image') is-invalid @enderror">
                                                 <div class="input-group-btn"> 
                                                     <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                                                 </div>

@@ -47,22 +47,26 @@ class MultipleProductController extends Controller
         //upload image
         if($request->hasfile('image'))
         {
-
-        foreach($request->file('image') as $image)
-        {
-            $name=$image->getClientOriginalName();
-            $image->move(public_path().'/images/', $name);  
-            $data[] = $name;  
+            foreach($request->file('image') as $image)
+            {
+                $name=$image->getClientOriginalName();
+                $image->storeAs('public/product', $name);  
+                $multipleproduct = MultipleProductModel::create([
+                    'title'     => $request->title,
+                    'price'     => preg_replace('([^0-9])', '', $request->price),
+                    'image'     => $image->getClientOriginalName(),
+                    'content'   => $request->content
+                ]);
+            }
         }
+
+        if($multipleproduct){
+            //redirect dengan pesan sukses
+            return redirect()->route('product.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        }else{
+            //redirect dengan pesan error
+            return redirect()->route('product.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
-
-        $form= new MultipleProductModel();
-        $form->image=json_encode($data);
-        
-        
-        $form->save();
-
-        return back()->with('success', 'Your images has been successfully');
     }
     /**
     * edit
