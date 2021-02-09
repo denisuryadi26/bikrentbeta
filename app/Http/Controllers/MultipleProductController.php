@@ -14,7 +14,7 @@ class MultipleProductController extends Controller
      */
     public function index()
     {
-        $products = MultipleProductController::latest()->paginate(10);
+        $multipleproduct = MultipleProductModel::latest()->paginate(10);
         return view('multipleproduct.index', compact('multipleproduct'));
     }
 

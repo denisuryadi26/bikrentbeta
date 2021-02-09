@@ -40,11 +40,47 @@
                         <div class="col-md-12">
                             <div class="card border-0 shadow rounded">
                                 <div class="card-body">
-                                    <form action="/upload" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="file" name="image[]" id="" multiple="true">
-                                        <button type="submit">Submit</button>
-                                    </form>
+                                    <a href="{{ route('multipleproduct.create') }}" class="btn btn-md btn-success mb-3"><i class="fas fa-plus"></i></a>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">NO</th>
+                                                <th scope="col">PRODUCT NAME</th>
+                                                <th scope="col">PRICE</th>
+                                                <th scope="col">IMAGE</th>
+                                                <th scope="col">DESCRIPTION</th>
+                                                <th scope="col">ACTION</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($multipleproduct as $product)
+                                            <tr>
+                                                <td style="width: 50px" class="text-center">{{ $loop->iteration + $multipleproduct->firstItem() - 1 }}</td>
+                                                <td>{{ $product->title }}</td>
+                                                <td>Rp. {{ number_format($product->price,0,',','.') }}</td>
+                                                <td class="text-center">
+                                                    <img src="{{ Storage::url('public/product/').$product->image }}" class="rounded" style="width: 150px">
+                                                </td>
+                                                <td>{!! $product->content !!}</td>
+                                                <td class="text-center">
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('product.destroy', $product->id) }}" method="POST">
+                                                        <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            @empty
+                                                <div class="alert alert-danger">
+                                                    Product belum Tersedia.
+                                                </div>
+                                            @endforelse
+                                        </tbody>
+                                    </table>  
+                                    <br>
+                                    <!-- {{ $multipleproduct->links() }} -->
+                                    {{ $multipleproduct->links('pagination::bootstrap-4') }}
                                 </div>
                             </div>
                         </div>
